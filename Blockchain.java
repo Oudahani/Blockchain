@@ -4,6 +4,9 @@ public class Block {
     private String data;
     private long timeStamp;
     private int nonce;
+    
+    File file = new File ("c:\\test\\temp\\BlockChin.txt");
+    FileWriter f1 = new FileWriter(file);
  
     public Block(String data, String previousHash, long timeStamp) {
         this.data = data;
@@ -28,6 +31,9 @@ public class Block {
     for (byte b : bytes) {
         buffer.append(String.format("%02x", b));
     }
+    f1.write($"{buffer.toString()}\n");
+    f1.close();
+
     return buffer.toString();
 }
 public String mineBlock(int prefix) {
@@ -36,8 +42,11 @@ public String mineBlock(int prefix) {
         nonce++;
         hash = calculateBlockHash();
     }
+    f1.write($"{hash}\n");
+    f1.close();
     return hash;
 }
+    
 List<Block> blockchain = new ArrayList<>();
 int prefix = 4;
 String prefixString = new String(new char[prefix]).replace('\0', '0');
